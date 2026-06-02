@@ -1,32 +1,41 @@
-name: github pages
+name: GH Pages Deploy
 
 on:
   push:
-    branches:
-      - main # Set a branch to deploy
-  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  deploy:
-    runs-on: ubuntu-20.04
+  build:
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: true # Fetch Hugo themes (true OR recursive)
-          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: "latest"
-          # extended: true
+      - name: Install marmite
+        run: curl -sS https://marmite.blog/install.sh | sh
 
-      - name: Build
-        run: hugo --minify
+      - name: Build site
+        run: marmite . site --debug
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/main'
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          path: 'site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,15 +1,9 @@
-+++
-title = "Google Cloud Functions & Node - Visão Geral"
-date = "2022-06-07"
-author = "Luiz Guilherme Ribeiro"
-authorTwitter = "luiz_gribeiro" #do not include @
-cover = ""
-tags = ["cloud functions", "GCP", "serverless", "node"]
-keywords = ["serverless", "cloud functions"]
-description = "Uma análise introdutória da utilização de Node em cloud functions"
-showFullContent = false
-readingTime = false
-+++
+---
+title: "Google Cloud Functions & Node - Visão Geral"
+date: 2022-06-07
+tags: cloud-functions, GCP, serverless, node
+---
+# Google Cloud Functions & Node - Visão Geral
 
 ## Introdução:
 

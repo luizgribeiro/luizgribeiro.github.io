@@ -1,0 +1,12 @@
+name: "LG's blog"
+tagline: "Where ideas are turned into code"
+url: "https://luizgribeiro.github.io"
+pagination: 10
+language: en
+enable_search: true
+menu:
+  - ["about", "about.html"]
+  - ["tags", "tags.html"]
+  - ["archive", "archive.html"]
+extra:
+  colorscheme: nord
